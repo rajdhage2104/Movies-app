@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MovieController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">movies-app</a> &gt; <a href="index.source.html" class="el_package">com.movies.controller</a> &gt; <span class="el_source">MovieController.java</span></div><h1>MovieController.java</h1><pre class="source lang-java linenums">package com.movies.controller;
+
+import com.movies.model.Movie;
+import com.movies.service.MovieService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping(&quot;/api/movies&quot;)
+public class MovieController {
+    
+    private final MovieService movieService;
+    
+    @Autowired
+<span class="fc" id="L20">    public MovieController(MovieService movieService) {</span>
+<span class="fc" id="L21">        this.movieService = movieService;</span>
+<span class="fc" id="L22">    }</span>
+    
+    @GetMapping
+    public ResponseEntity&lt;List&lt;Movie&gt;&gt; getAllMovies() {
+<span class="fc" id="L26">        List&lt;Movie&gt; movies = movieService.getAllMovies();</span>
+<span class="fc" id="L27">        return new ResponseEntity&lt;&gt;(movies, HttpStatus.OK);</span>
+    }
+    
+    @GetMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;Movie&gt; getMovieById(@PathVariable Long id) {
+<span class="fc" id="L32">        Optional&lt;Movie&gt; movie = movieService.getMovieById(id);</span>
+<span class="fc" id="L33">        return movie.map(value -&gt; new ResponseEntity&lt;&gt;(value, HttpStatus.OK))</span>
+<span class="fc" id="L34">                .orElseGet(() -&gt; new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND));</span>
+    }
+    
+    @PostMapping
+    public ResponseEntity&lt;Movie&gt; createMovie(@RequestBody Movie movie) {
+<span class="fc" id="L39">        Movie savedMovie = movieService.saveMovie(movie);</span>
+<span class="fc" id="L40">        return new ResponseEntity&lt;&gt;(savedMovie, HttpStatus.CREATED);</span>
+    }
+    
+    @DeleteMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;Void&gt; deleteMovie(@PathVariable Long id) {
+<span class="fc" id="L45">        Optional&lt;Movie&gt; movie = movieService.getMovieById(id);</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        if (movie.isPresent()) {</span>
+<span class="fc" id="L47">            movieService.deleteMovie(id);</span>
+<span class="fc" id="L48">            return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+        } else {
+<span class="fc" id="L50">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

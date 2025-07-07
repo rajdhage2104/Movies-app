@@ -1,0 +1,6 @@
+com\movies\MoviesApplication.class
+com\movies\service\MovieService.class
+com\movies\controller\MovieController.class
+com\movies\MoviesApplication$1.class
+com\movies\repository\MovieRepository.class
+com\movies\model\Movie.class

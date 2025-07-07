@@ -1,0 +1,4 @@
+com\movies\controller\MovieControllerTest.class
+com\movies\service\MovieServiceTest.class
+com\movies\model\MovieTest.class
+com\movies\MoviesApplicationTest.class

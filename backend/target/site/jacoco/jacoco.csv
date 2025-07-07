@@ -1,0 +1,6 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+movies-app,com.movies.service,MovieService,0,26,0,0,0,8,0,5,0,5
+movies-app,com.movies.controller,MovieController,0,72,0,2,0,15,0,8,0,7
+movies-app,com.movies.model,Movie,42,254,30,24,0,9,24,21,0,18
+movies-app,com.movies,MoviesApplication.new WebMvcConfigurer() {...},31,6,0,0,4,1,1,1,1,1
+movies-app,com.movies,MoviesApplication,5,8,0,0,2,2,1,2,1,2
